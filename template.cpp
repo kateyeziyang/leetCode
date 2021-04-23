@@ -4,6 +4,8 @@
 #include <cassert>
 #include <iostream>
 #include <unordered_map>
+#include <algorithm>
+#include <numeric>
 
 using namespace std;
 
