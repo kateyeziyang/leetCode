@@ -11,6 +11,8 @@ using namespace std;
 
 // Dynamic programming.
 // Sort functions comes from https://stackoverflow.com/questions/17074324/how-can-i-sort-two-vectors-in-the-same-way-with-criteria-that-uses-only-one-of?noredirect=1&lq=1
+// Runtime: 96 ms, faster than 90.71% of C++ online submissions for Maximum Profit in Job Scheduling.
+// Memory Usage: 48.1 MB, less than 86.84% of C++ online submissions for Maximum Profit in Job Scheduling.
 class Solution {
 public:
     template <typename T, typename Compare>
@@ -57,7 +59,7 @@ public:
             }
             maxProfitI[i] = profitWithI > maxProfitI[i+1] ? profitWithI : maxProfitI[i+1];
         }
-        string a = "a";
+
         return maxProfitI[0];
     }
 };
