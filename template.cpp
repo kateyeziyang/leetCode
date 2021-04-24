@@ -11,7 +11,10 @@ using namespace std;
 
 int main() {
     Solution mysol;
+    int result;
+    vector<int>
 
+    cout << result << endl;
     assert();
 
     cout << "Finished.\n";
