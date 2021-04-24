@@ -44,7 +44,7 @@ public:
             }
             maxProfitI[i] = profitWithI > maxProfitI[i+1] ? profitWithI : maxProfitI[i+1];
         }
-        string a = "a";
+
         return maxProfitI[0];
     }
 };
