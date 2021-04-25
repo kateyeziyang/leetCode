@@ -14,7 +14,7 @@ using namespace std;
 int main() {
     Solution mysol;
     int result;
-    vector<int>
+    vector<int> ;
 
     cout << result << endl;
     assert();
