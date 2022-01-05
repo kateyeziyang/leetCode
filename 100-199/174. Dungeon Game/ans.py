@@ -5,29 +5,38 @@ from collections import defaultdict, deque
 class Solution:
     def calculateMinimumHP(self, dungeon: List[List[int]]) -> int:
         m,n = len(dungeon),len(dungeon[0])
-        mhps = [[0]*n for i in m]
-        curhps = [[0]*n for i in m]
-        mhps[0][0] = -min(0,dungeon[0][0])
-        curhps[0][0] = max(0, dungeon[0][0])
-        for j in range(1,n):
-            curhp = curhps[0][j-1]+dungeon[0][j]
-            mhps[0][j] = min(-min(0,curhp),mhps[0][j-1])
-            curhps[0][j] = max(0,curhp)
-        for i in range(1,n):
-            curhp = curhps[i-1][0]+dungeon[i][0]
-            mhps[i][0] = min(-min(0,curhp),mhps[i-1][0])
-            curhps[i][0] = max(0,curhp)
-        for i in range(1,m):
-            for j in range(1,n):
-                curhps_up = curhps[i-1][j]
-                curhps_left = curhps[i][j-1]
-                maxcur = max(curhps_up,curhps_left)+dungeon[i][j]
-                if curhps_up >= curhps_left:
+        uprow,downrow = [0]*n,[0]*n
+        isUp = False
 
-                prevmhps = mhps[i-1][j] if isUp else mhps[i][j-1]
-                mhps[i][j] = min(0,-maxcur)
+        for i in range(m-1,-1,-1):
+            for j in range(n-1,-1,-1):
+                currow = uprow if isUp else downrow
+                nextrow = uprow if not isUp else downrow
+                minhp = None
+                if i<m-1:
+                    minhp = nextrow[j]
+                if j<n-1:
+                    minhp = currow[j+1] if not minhp else min(minhp,currow[j+1])
+                minhp = 1 if not minhp else minhp
+                currow[j] = max(1,minhp-dungeon[i][j])
+            isUp = not isUp
+        return currow[0]
 
-        return min(1,-mhps[0][0])
-
+# class Solution:
+#     def calculateMinimumHP(self, dungeon: List[List[int]]) -> int:
+#         m,n = len(dungeon),len(dungeon[0])
+#         dp = [[0]*n for i in range(m)]
+#         for i in range(m-1,-1,-1):
+#             for j in range(n-1,-1,-1):
+#                 minhp = None
+#                 if i<m-1:
+#                     minhp = dp[i+1][j]
+#                 if j<n-1:
+#                     minhp = dp[i][j+1] if not minhp else min(minhp,dp[i][j+1])
+#                 minhp = 1 if not minhp else minhp
+#                 dp[i][j] = max(1,minhp-dungeon[i][j])
+#         return dp[0][0]
 
 s = Solution()
+assert s.calculateMinimumHP(dungeon = [[-2,-3,3],[-5,-10,1],[10,30,-5]])==7
+assert s.calculateMinimumHP([[-3],[-7]])==11
