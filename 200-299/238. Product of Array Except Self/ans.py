@@ -5,18 +5,20 @@ from bisect import bisect_left
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        def helper(arr,i):
-            nb = i-1 if i%2 else i+1
-            l = len(arr)
-            newarr = [1]*(l//2)
-            for i in range(0,len(newarr)):
-                newarr[i] = arr[2*i]*arr[2*i+1]
-            if l%2:
-                newarr.append(arr[-1])
-            return arr[nb] * helper(newarr,i//2)
-        l = len(nums)
-        ans = [1]*l
-        for i,x in enumerate(ans):
-            ans[i]  = helper(nums,i)
+        n = len(nums)
+        left,right = [0]*n,[0]*n
+        lbase,rbase=1,1
+        for i in range(n):
+            lbase *= nums[i]
+            rbase *= nums[n-1-i]
+            left[i] = lbase 
+            right[n-1-i] = rbase
+        ans = [0]*n
+        ans[0] = right[1]
+        ans[-1] = left[-2]
+        for i in range(1,n-1):
+            ans[i] = left[i-1]*right[i+1]
+        return ans
+
 
 s = Solution()

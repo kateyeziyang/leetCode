@@ -3,6 +3,8 @@ import heapq, math
 from collections import defaultdict, deque,Counter
 from bisect import bisect_left
 
+# there is only one type of bracket, anyway...
+
 class Solution:
     def longestValidParentheses(self, s: str) -> int:
         st = deque()
