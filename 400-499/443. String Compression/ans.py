@@ -30,6 +30,15 @@ class Solution:
             loc += len(s)
         return loc
 
-s = Solution()
-print(s.compress("abcdef"))
-print(s.compress("aaaaaffffdeea"))
+# s = Solution()
+# print(s.compress("abcdef"))
+# print(s.compress("aaaaaffffdeea"))
+
+def f(a,b):
+    if a==b:
+        return a
+    if a>b:
+        return f(a-b,b)
+    else:
+        return f(a,b-a)
+print(f(2437,875))
