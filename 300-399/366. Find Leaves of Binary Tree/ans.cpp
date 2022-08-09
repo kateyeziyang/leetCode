@@ -18,14 +18,35 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
-};
-
 class Solution {
+private:
+    vector<vector<int>> solution;
+
 public:
+    int getHeight(TreeNode *root) {
+        if (!root) {
+            return -1;
+        }
+        int lHeight = getHeight(root->left);
+        int rHeight = getHeight(root->right);
+
+        int curHeight = max(lHeight,rHeight)+1;
+
+        if (this->solution.size() == curHeight) {
+            this->solution.push_back({});
+        }
+
+        this->solution[curHeight].push_back(root->val);
+
+        return curHeight;
+    }
+
+    vector<vector<int>> findLeaves(TreeNode* root) {
+        this->solution.clear();
+        getHeight(root);
+
+        return this->solution;
+    }
 };
 
 int main() {

@@ -18,14 +18,21 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
-};
-
 class Solution {
 public:
+    TreeNode* sortedArrayToBST(vector<int>& nums) {
+        int n = nums.size();
+        return setNode(0,n-1,nums);
+    }
+
+    TreeNode* setNode(int l, int r, vector<int>& nums) {
+        if (l>r) return NULL;
+        int m = l+(r-l)/2;
+        TreeNode* cur = new TreeNode(nums[m]);
+        cur->left = setNode(l,m-1,nums);
+        cur->right = setNode(m+1,r,nums);
+        return cur;
+    }
 };
 
 int main() {
