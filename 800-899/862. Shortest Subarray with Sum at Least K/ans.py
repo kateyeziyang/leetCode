@@ -36,6 +36,21 @@ class Solution:
 #             ans = -1
 #         return ans
 
+from itertools import accumulate
+class Solution:
+    def shortestSubarray(self, nums: List[int], k: int) -> int:
+        ans = float('inf')
+        n = len(nums)
+        prefixSum = [0] + list(accumulate(nums)) # n+1
+
+        for i in range(1, n+1):
+            for j in range(i):
+                if prefixSum[i]-prefixSum[j]>=k:
+                    ans = min(ans, i-j)
+        return ans if ans != float('inf') else -1
+
+
+
 
 s = Solution()
 assert s.shortestSubarray([1],1)==1
