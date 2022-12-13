@@ -11,7 +11,26 @@
 
 using namespace std;
 
+class MyCalendar {
+public:
+    MyCalendar() {
+        
+    }
+    
+    bool book(int start, int end) {
+        
+    }
 
+    bool isConflicted(int a, int b, int c, int d){
+        return a < d and b < c;
+    }
+};
+
+/**
+ * Your MyCalendar object will be instantiated and called as such:
+ * MyCalendar* obj = new MyCalendar();
+ * bool param_1 = obj->book(start,end);
+ */
 
 int main() {
     Solution mysol;
