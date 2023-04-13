@@ -16,4 +16,16 @@ class Solution:
             incs[i] += incs[i-1]
         return incs
 
+
+class Solution:
+    def getModifiedArray(self, length: int, updates: List[List[int]]) -> List[int]:
+        ans = [0] * length
+        for s, e, i in updates:
+            ans[s] += i
+            if e+1 < length:
+                ans[e+1] -= i
+        for i in range(1, length):
+            ans[i] = ans[i-1] + ans[i]
+        return ans
+
 s = Solution()

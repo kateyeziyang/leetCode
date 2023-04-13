@@ -14,8 +14,11 @@ using namespace std;
 
 
 int main() {
+    Solution mysol;
+    int result;
+    vector<int> x;
 
-    cout << 111 << endl;
+    cout << result << endl;
     assert(true);
 
     cout << "Finished.\n";
